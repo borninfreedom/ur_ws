@@ -10,7 +10,7 @@ rosdep update
 rosdep install --from-paths src --ignore-src --rosdistro kinetic -y
 catkin build
 ```
-* **if rosdep init & rosdep update failed,please visit [ROS -sudo rosdep init 失败解决方法](https://blog.csdn.net/bornfree5511/article/details/106267533)
+* **if rosdep init & rosdep update failed,please visit [ROS -sudo rosdep init 失败解决方法](https://blog.csdn.net/bornfree5511/article/details/106267533)**
 
 ## Run
 
