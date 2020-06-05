@@ -2,7 +2,7 @@
 <launch>
   <arg name="limited" default="false" doc="If true, limits joint range [-PI, PI] on all joints." />
   <arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface" />
-  <arg name="kinematics_config" default="$(find ur_description)/config/ur3_default.yaml"/>
+  <arg name="kinematics_config" default="$(find ur_robot_driver)/calibration/my_robot_calibration.yaml"/>
 
   <param unless="$(arg limited)" name="robot_description" command="$(find xacro)/xacro --inorder '$(find ur_platform_description)/urdf/ur_platform.urdf.xacro'
     transmission_hw_interface:=$(arg transmission_hw_interface)

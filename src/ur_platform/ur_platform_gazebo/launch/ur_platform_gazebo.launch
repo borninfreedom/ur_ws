@@ -3,7 +3,8 @@
   <arg name="paused" default="false"/>
   <arg name="gui" default="true"/>
   <arg name="debug" default="false"/>
-  
+  <arg name="limited" default="false" doc="If true, limits joint range [-PI, PI] on all joints." />
+  <!--arg name="robot_description_file" default="$(find ur_description)/launch/ur3_upload.launch" doc="Robot description launch file."/-->
   <!-- startup simulated world -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" default="$(find ur_platform_gazebo)/worlds/demo.world"/>
@@ -11,10 +12,14 @@
     <arg name="gui" value="$(arg gui)"/>
   </include>
 
-  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find ur_platform_description)/urdf/ur_platform.urdf.xacro'" />
+ 
+  <include file="$(find ur_platform_description)/launch/ur_platform_upload.launch">
+    <arg name="limited" value="$(arg limited)"/>
+  </include>
 
   <!-- push robot_description to factory and spawn robot in gazebo -->
   <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model robot -z 0.1" respawn="false" output="screen" />
+  
   <include file="$(find ur_gazebo)/launch/controller_utils.launch"/>
 
   <rosparam file="$(find ur_platform_gazebo)/controller/arm_controller.yaml" command="load"/>
